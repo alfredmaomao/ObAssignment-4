@@ -1,4 +1,5 @@
 package Main;
+
 import Exception.*;
 
 class BankAccount {
@@ -36,24 +37,25 @@ class BankAccount {
     /** deposit money into the account */
     public void deposit(double depositAmount) throws BankAccountException {
         if (depositAmount <= 0) {
-            throw new InvalidAmountException("Deposit amount must be positive.");
-        } else if (depositAmount > depositLimit) {
-            throw new DepositLimitException("Deposit amount exceeds the deposit limit.");
-        } else {
-            balance += depositAmount;
+            throw new InvalidAmountException("Invalid deposit amount: " + depositAmount);
         }
+        if (depositAmount > depositLimit) {
+            throw new DepositLimitException("Deposit amount exceeds limit: " + depositAmount);
+        }
+        balance += depositAmount;
     }
 
     /** withdraw money from the account */
     public void withdraw(double withdrawAmount) throws BankAccountException {
         if (withdrawAmount <= 0) {
-            throw new InvalidAmountException("Withdrawal amount must be positive.");
-        } else if (withdrawAmount > withdrawLimit) {
-            throw new WithdrawLimitException("Withdrawal amount exceeds the withdraw limit.");
-        } else if (withdrawAmount > balance) {
-            throw new NotEnoughBalanceException("Not enough balance for withdrawal.");
-        } else {
-            balance -= withdrawAmount;
+            throw new InvalidAmountException("Invalid withdraw amount: " + withdrawAmount);
         }
+        if (withdrawAmount > withdrawLimit) {
+            throw new WithdrawLimitException("Withdraw amount exceeds limit: " + withdrawAmount);
+        }
+        if (withdrawAmount > balance) {
+            throw new NotEnoughBalanceException("Not enough balance for withdrawal: " + withdrawAmount);
+        }
+        balance -= withdrawAmount;
     }
 }

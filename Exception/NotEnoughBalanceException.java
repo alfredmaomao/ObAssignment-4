@@ -1,5 +1,7 @@
 package Exception;
 
-public class NotEnoughBalanceException {
-
+public class NotEnoughBalanceException extends BankAccountException {
+    public NotEnoughBalanceException(String message) {
+        super(message);
+    }
 }
